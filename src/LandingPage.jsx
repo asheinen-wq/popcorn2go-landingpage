@@ -354,6 +354,7 @@ export default function LandingPage() {
     };
   }, []);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 900);
