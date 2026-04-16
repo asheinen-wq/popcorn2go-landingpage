@@ -1,38 +1,120 @@
-.App {
-  text-align: center;
+/* 1. Schriftarten & Variablen */
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@400;900&display=swap');
+
+:root {
+  --gold: #f59e0b;
+  --gold-glow: rgba(245, 158, 11, 0.5);
+  --navy-dark: #0f172a;
+  --navy-light: #1e293b;
+  --glass: rgba(255, 255, 255, 0.05);
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+/* 2. Grundlayout */
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--navy-dark);
   color: white;
+  font-family: 'Inter', sans-serif;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
 }
 
-.App-link {
-  color: #61dafb;
+.App {
+  position: relative;
+  min-height: 100vh;
+  /* Edler Verlauf im Hintergrund */
+  background: linear-gradient(180deg, var(--navy-dark) 0%, var(--navy-light) 100%);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+/* 3. Die Bubble-Maschine (Stark ausgeprägt) */
+.bubble-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1; /* Hinter dem Text (z-index 2), aber vor dem Hintergrund */
+}
+
+.bubble {
+  position: absolute;
+  bottom: -120px;
+  border-radius: 50%;
+  
+  /* Hochwertiger Glas-Look mit Lichtreflexion */
+  background: radial-gradient(circle at 30% 30%, 
+                rgba(255, 255, 255, 0.5) 0%, 
+                var(--gold-glow) 40%, 
+                rgba(245, 158, 11, 0.8) 100%);
+  
+  /* Starkes Glühen nach außen */
+  box-shadow: 0 0 20px var(--gold-glow), 
+              inset 0 0 10px rgba(255, 255, 255, 0.4);
+  
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  opacity: 0;
+  animation: riseAndSway 10s infinite ease-in forwards;
+}
+
+/* Variationen für die Blasen (Größe & Position) */
+.bubble:nth-child(4n) { width: 60px; height: 60px; left: 10%; animation-duration: 8s; animation-delay: 1s; }
+.bubble:nth-child(4n+1) { width: 30px; height: 30px; left: 30%; animation-duration: 12s; animation-delay: 0s; }
+.bubble:nth-child(4n+2) { width: 80px; height: 80px; left: 60%; animation-duration: 15s; animation-delay: 3s; filter: blur(2px); }
+.bubble:nth-child(4n+3) { width: 45px; height: 45px; left: 85%; animation-duration: 10s; animation-delay: 5s; }
+
+/* 4. Die Animation (Aufsteigen mit Schwingung) */
+@keyframes riseAndSway {
+  0% {
+    transform: translateY(0) translateX(0) scale(0.5);
+    opacity: 0;
   }
-  to {
-    transform: rotate(360deg);
+  15% {
+    opacity: 0.7;
   }
+  50% {
+    /* Schwingung zur Seite */
+    transform: translateY(-50vh) translateX(30px) scale(1.1);
+  }
+  100% {
+    transform: translateY(-120vh) translateX(-30px) scale(1.4);
+    opacity: 0;
+  }
+}
+
+/* 5. Lukrative Price-Cards (Floating Effekt) */
+.price-card-highlight {
+  animation: floating 5s ease-in-out infinite;
+  border: 2px solid var(--gold) !important;
+  box-shadow: 0 0 30px var(--gold-glow) !important;
+}
+
+@keyframes floating {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+
+/* 6. Formular-Styling (Fokus auf Conversion) */
+input, textarea {
+  background: var(--glass) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  transition: all 0.3s ease;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 10px var(--gold-glow) !important;
+  outline: none;
+}
+
+/* 7. Scrollbar */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--navy-dark); }
+::-webkit-scrollbar-thumb { 
+  background: var(--gold); 
+  border-radius: 10px; 
 }
