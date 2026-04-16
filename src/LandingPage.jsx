@@ -175,7 +175,7 @@ export default function LandingPage() {
     { label: "Stromanschluss", value: "220V" },
   ];
 
-  const faqItems = [
+ const faqItems = useMemo(() => [
     {
       question: "Wie viel Platz braucht AirPop Go?",
       answer:
@@ -206,7 +206,7 @@ export default function LandingPage() {
       answer:
         "Wir verwenden speziell veredelten Popcornmais, der glutenfrei ist, ohne Farbstoffe auskommt und ohne Gentechnik hergestellt wird.",
     },
-  ];
+  ], []);
 
   const requestHelpItems = [
     "Anlass der Veranstaltung",
@@ -352,7 +352,7 @@ export default function LandingPage() {
       const existing = document.getElementById("popcorn2go-faq-schema");
       if (existing) existing.remove();
     };
-  }, []);
+   }, [faqItems]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => {
