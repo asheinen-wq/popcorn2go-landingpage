@@ -1838,7 +1838,7 @@ export default function LandingPage() {
             <div style={{ ...styles.heroImageWrap, position: "relative" }}>
 
 <img
-  src="/images/logo.png"
+  src="/images/Logo.png"
   alt="Popcorn2Go Logo"
   style={{
   position: "absolute",
